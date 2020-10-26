@@ -22,6 +22,7 @@ jobs:
       uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "codeql/docs/language"
+        build-command: "sphinx-build -b html . sphinx-codeql"
     - name: Upload HTML artifacts
       uses: actions/upload-artifact@v2
       with:
