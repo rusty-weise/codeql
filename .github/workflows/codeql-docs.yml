@@ -1,0 +1,28 @@
+name: Generate CodeQL documentation using Sphinx
+
+on:
+  push:
+    branches:
+     - main
+     - 'rc/**'
+  pull_request:
+    paths:
+      - '.github/workflows/codeql-docs.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone self (github/codeql)
+      uses: actions/checkout@v2
+      with:
+        path: codeql 
+    - name: Run Sphinx
+      uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "codeql/docs/language"
+    - name: Upload HTML artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sphinx-html
+        path: sphinx-html
